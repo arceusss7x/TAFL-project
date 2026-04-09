@@ -1,0 +1,95 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #0a0e1a;
+  color: #e2e8f0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #1a1f2e; }
+::-webkit-scrollbar-thumb { background: #3b4a6b; border-radius: 3px; }
+
+input, select, textarea {
+  background: #1a1f2e;
+  border: 1px solid #2d3748;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input:focus, select:focus, textarea:focus { border-color: #4f9eff; }
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 14px;
+  transition: all 0.2s;
+}
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Stack animations */
+@keyframes pushIn {
+  from { transform: translateY(-40px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+@keyframes popOut {
+  from { transform: translateY(0);     opacity: 1; }
+  to   { transform: translateY(-40px); opacity: 0; }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(79,158,255,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(79,158,255,0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 4px #4f9eff); }
+  50%       { filter: drop-shadow(0 0 12px #4f9eff); }
+}
+
+.stack-item-enter { animation: pushIn 0.35s ease forwards; }
+.stack-item-exit  { animation: popOut 0.35s ease forwards; }
+.state-active     { animation: pulse 1.2s infinite; }
+.fade-in          { animation: fadeIn 0.3s ease; }
+.glow-anim        { animation: glow 1.5s infinite; }
+
+/* Tape */
+.tape-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #2d3748;
+  font-family: monospace;
+  font-size: 16px;
+  border-radius: 4px;
+  background: #1a1f2e;
+  transition: all 0.2s;
+}
+.tape-cell.active {
+  background: #1e3a5f;
+  border-color: #4f9eff;
+  color: #4f9eff;
+  box-shadow: 0 0 8px rgba(79,158,255,0.5);
+}
+.tape-cell.consumed {
+  opacity: 0.4;
+}
+
+/* Result banner */
+@keyframes bannerIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.result-banner { animation: bannerIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
